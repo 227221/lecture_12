@@ -33,13 +33,31 @@ def read_rows(file_name, row_number):
     pass
 
 
-def selection_sort(number_array):
+def selection_sort(number_array, direction="ascending"):
     """
         Sorts and returns selected numeric data with Selection Sort.
         :param number_array: (list,int), list with numeric array
         :return: (list, int), sorted numeric array
     """
-    pass
+    sorted_numbers = []
+    for count in range(0, len(number_array)):
+        position = 0
+        value = number_array[0]
+        for index, number in enumerate(number_array):
+            if direction == "ascending":
+                if number < value:
+                    value = number
+                    position = index
+                else:
+                    continue
+            else:
+                if number > value:
+                    value = number
+                    position = index
+                else:
+                    continue
+        sorted_numbers.append(number_array.pop(position))
+    return sorted_numbers
 
 
 def bubble_sort(number_array):
@@ -52,12 +70,17 @@ def bubble_sort(number_array):
 
 
 def main():
-    print(read_row("numbers_one.csv"))
-    # Ukol: Selection Sort
+    numbers = read_row("numbers_one.csv")
+    print(numbers)
 
+    # Ukol: Selection Sort
+    sorted_numbers = selection_sort(numbers)
+    print(sorted_numbers)
 
     # Ukol: Selection Sort - se smerem razeni
-    
+    numbers = read_row("numbers_one.csv")
+    sorted_numbers = selection_sort(numbers, "descending")
+    print(sorted_numbers)
 
     # Ukol: Bubble Sort
 
