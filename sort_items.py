@@ -1,6 +1,5 @@
 import csv
 import os
-import random
 
 
 cwd_path = os.getcwd()
@@ -30,14 +29,24 @@ def read_rows(file_name, row_number):
     :param row_number: (int), number of selected row
     :return: (list, int),
     """
-    pass
+    groups = []
+    with open(file_name, "r") as file:
+        reader = csv.reader(file, delimiter=",")
+        for row in reader:
+            data = []
+            for number in row:
+                data.append(int(number))
+            groups.append(data)
+        numbers = groups[row_number - 1]
+        return numbers
 
 
 def selection_sort(number_array, direction="ascending"):
     """
-        Sorts and returns selected numeric data with Selection Sort.
-        :param number_array: (list,int), list with numeric array
-        :return: (list, int), sorted numeric array
+
+    :param number_array:
+    :param direction:
+    :return:
     """
     sorted_numbers = []
     for count in range(0, len(number_array)):
@@ -66,29 +75,32 @@ def bubble_sort(number_array):
        :param number_array: (list,int), list with numeric array
        :return: (list, int), sorted numeric array
     """
-    pass
+    for i in range(len(number_array)):
+        for index, number in enumerate(number_array):
+            if index == len(number_array) - 1:
+                break
+            elif number > number_array[index + 1]:
+                number_array[index], number_array[index + 1] = number_array[index + 1], number_array[index]
+            else:
+                continue
+    return number_array
 
 
 def main():
     numbers = read_row("numbers_one.csv")
     print(numbers)
 
-    # Ukol: Selection Sort
     sorted_numbers = selection_sort(numbers)
     print(sorted_numbers)
 
-    # Ukol: Selection Sort - se smerem razeni
     numbers = read_row("numbers_one.csv")
     sorted_numbers = selection_sort(numbers, "descending")
     print(sorted_numbers)
 
-    # Ukol: Bubble Sort
-
-
-    # příklad výpisu hodnot seřazené řady
-    # print ("Seřazená řada čísel je:")
-    # for i in range(len(number_array)):
-    #	print ("%d" %number_array[i]),
+    numbers = read_rows("numbers_two.csv", 1)
+    print(numbers)
+    sorted_numbers = bubble_sort(numbers)
+    print(sorted_numbers)
 
 
 if __name__ == '__main__':
